@@ -1,0 +1,67 @@
+aid: on-the-beach
+url: https://raw.githubusercontent.com/api-evangelist/on-the-beach/refs/heads/main/apis.yml
+name: On the Beach
+kind: company
+description: >-
+  On the Beach Group plc (LSE: OTB) is a Manchester-headquartered online travel
+  agent and the United Kingdom's largest online short-haul beach package holiday
+  specialist, founded in 2004 by Simon Cooper and registered at Aeroworks, 5
+  Adair Street, Manchester M1 2NQ. It sits on the demand side of the travel
+  distribution chain: an asset-light dynamic packager that buys real-time seats
+  from 42 airlines and hotel inventory from bedbanks and direct hotel contracts,
+  combines them into ATOL-protected packages, and sells them direct to UK and
+  Republic of Ireland consumers through onthebeach.co.uk, sunshine.co.uk and its
+  mobile app. FY25 total transaction value was GBP 1.25bn across 1.7 million
+  customers. It is a consumer of other operators' distribution APIs rather than a
+  publisher of its own - it was the first UK OTA to take a direct NDC connection
+  to Emirates' Online B2B API in 2019 and signed a direct Ryanair "Approved OTA"
+  partnership in 2024 - and it explicitly bypasses the GDS layer entirely. Its
+  API posture as a producer is honestly non-existent. The FY25 results describe
+  an "API-first microservices architecture" and a proprietary Hotel Discovery
+  Cache managing more than 5 billion hotel prices, but none of that surface is
+  published: there is no developer portal, no API documentation, no OpenAPI or
+  other machine-readable contract, no partner or trade API, and no self-serve
+  access of any kind. Its only remaining B2B channel, Classic Collection, was put
+  into orderly wind-down on 23 September 2025. Public docs do not exist, there is
+  no published exit path, and every probed developer subdomain and contract path
+  returned 404 or did not resolve.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Travel
+- United Kingdom
+- OTA
+- Online Travel Agency
+- Booking
+- Package Holidays
+- Aviation
+- Airline
+- Distribution
+- NDC
+- Hotels
+- Hospitality
+created: '2026-07-28'
+modified: '2026-07-28'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://www.onthebeachgroupplc.com/
+- type: ConsumerWebsite
+  url: https://www.onthebeach.co.uk/
+- type: About
+  url: https://www.onthebeachgroupplc.com/about-us/who-we-are
+- type: Strategy
+  url: https://www.onthebeachgroupplc.com/about-us/strategy
+- type: InvestorRelations
+  url: https://www.onthebeachgroupplc.com/investor-centre
+- type: AnnualReport
+  url: https://www.onthebeachgroupplc.com/~/media/Files/O/On-The-Beach/investor-docs/results-and-presentations/on-the-beach-group-final-results-2025.pdf
+- type: GitHubOrganization
+  url: https://github.com/onthebeach
+- type: LinkedIn
+  url: https://www.linkedin.com/company/on-the-beach
+- type: Contact
+  url: https://www.onthebeachgroupplc.com/contact
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

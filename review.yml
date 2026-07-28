@@ -1,0 +1,393 @@
+aid: on-the-beach
+name: On the Beach
+review:
+  question: Does On the Beach Group publish a public developer portal, API documentation,
+    or any machine-readable API contract?
+  answer: false
+  date: '2026-07-28'
+  reviewer: API Evangelist
+  tier: ota-metasearch
+  homeMarket: United Kingdom
+  openapiHarvested: false
+  specsCount: 0
+findings:
+  summary: |
+    On the Beach Group plc is a UK online travel agent and dynamic packager. It
+    is a CONSUMER of travel distribution APIs, not a producer of them. Nothing
+    machine-readable is published under its own name.
+
+    Every developer-facing host and path was probed on 2026-07-28. There is no
+    developer portal, no API reference, no OpenAPI/Swagger document, no partner
+    or trade API, no llms.txt, no .well-known catalogue and no MCP surface. The
+    company's only public code presence is a GitHub organisation of 24 small
+    Ruby libraries, all last pushed between 2012 and 2018, none of which
+    describe or wrap a product API.
+
+    The FY25 final results (2 December 2025) state plainly that the internal
+    architecture is API-first - "We have spent 3 years building AI ready tech.
+    Our API-first microservices architecture is enabling direct integration into
+    ChatGPT, Gemini, and emerging AI platforms" - but that architecture is
+    entirely private. No endpoint, schema, scope or key-issuing flow is exposed
+    to a third party.
+
+    Its only B2B channel, Classic Collection (and the Classic Package Holidays
+    agent portal), was placed into orderly wind-down: "On 23 September 2025, the
+    Board made the decision to abandon the Classic Collection Holdings
+    operation". Both classicpackageholidays.co.uk and classicpackageholidays.com
+    returned HTTP 530 (Cloudflare origin unreachable) when probed. The company
+    now has no B2B distribution surface at all.
+  companyFacts:
+    legalName: On the Beach Group plc
+    listing: London Stock Exchange (ticker OTB)
+    founded: 2004
+    founder: Simon Cooper
+    registeredOffice: Aeroworks, 5 Adair Street, Manchester M1 2NQ, United Kingdom
+    fy25TotalTransactionValue: GBP 1.25bn (FY24 GBP 1.12bn, +11%)
+    fy25Customers: 1.7 million
+    fy25AirlinesOnSale: 42
+    fy25HotelsOnSale: 24,000
+    fy25DestinationsOnSale: 240
+    regulatoryProtection: ATOL licensed by the UK Civil Aviation Authority; "All ATOL
+      protected customer monies are held in a trust account until after the provision
+      of the holiday"
+    brands:
+    - On the Beach (onthebeach.co.uk) - core B2C brand, UK and Republic of Ireland
+    - sunshine.co.uk - secondary B2C brand acquired 2013
+    - Classic Collection Holidays - B2B tour operator, wind-down commenced 23 September
+      2025
+    - Classic Package Holidays - self-service agent portal derived from Classic Collection,
+      site now unreachable (HTTP 530)
+  proprietaryPlatform:
+    hotelDiscoveryCache: "AI-powered platform managing more than 5 billion hotel prices,
+      described in FY25 results as ‘our Hotel Discovery Cache’"
+    fastFlexibleSearch: "In-memory data store allowing search of the entire holiday
+      inventory for any date range in under a second, described as ‘Fast Flexible
+      Search’"
+    note: Both are named as proprietary technology. Neither is exposed, licensed or
+      documented externally.
+switchingCost:
+  interfaceShape:
+    value: none-published
+    standardNamed: none
+    evidence: |
+      No interface of any kind is published by On the Beach. No OpenTravel/OTA
+      XML, no HTNG, no IATA NDC schema, no OpenAPI, no GraphQL, no AsyncAPI, no
+      Postman collection and no partner XML spec was found under any On the
+      Beach or On the Beach Group host. The standards it touches (NDC, airline
+      direct-connect schemas, bedbank XML) are consumed inbound from suppliers,
+      never re-published outbound.
+    probedForContracts:
+    - url: https://www.onthebeach.co.uk/openapi.json
+      status: 404
+    - url: https://www.onthebeach.co.uk/swagger.json
+      status: 403
+    - url: https://www.onthebeach.co.uk/api-docs
+      status: 403
+    - url: https://www.onthebeach.co.uk/api
+      status: 403
+    - url: https://www.onthebeach.co.uk/developers
+      status: 403
+    - url: https://www.onthebeach.co.uk/docs
+      status: 403
+    - url: https://www.onthebeach.co.uk/llms.txt
+      status: 404
+    - url: https://www.onthebeach.co.uk/.well-known/security.txt
+      status: 404
+    - url: https://www.onthebeach.co.uk/.well-known/mcp.json
+      status: 404
+    - url: https://www.onthebeach.co.uk/.well-known/ai-plugin.json
+      status: 403
+    - url: https://developer.onthebeach.co.uk
+      status: 000 (does not resolve)
+    - url: https://api.onthebeach.co.uk
+      status: 000 (does not resolve)
+    - url: https://docs.onthebeach.co.uk
+      status: 000 (does not resolve)
+    - url: https://developer.onthebeachgroupplc.com
+      status: 000 (does not resolve)
+    - url: https://api.onthebeachgroupplc.com
+      status: 000 (does not resolve)
+    - url: https://www.onthebeachgroupplc.com/technology
+      status: 404
+    - url: https://www.classic-collection.co.uk/openapi.json
+      status: 403
+    note: >-
+      HTTP 403 responses on onthebeach.co.uk are a Cloudflare bot challenge, not
+      evidence of a protected API; the same host returned HTTP 200 for
+      /robots.txt, /sitemap.xml, /main_pages.xml and /affiliates and HTTP 404 for
+      /openapi.json, /llms.txt and /.well-known/*, which confirms those paths do
+      not exist rather than being blocked.
+  secondSource:
+    value: interchangeable-alternatives
+    alternativesConsidered:
+    - Jet2holidays - UK's largest ATOL holder, same flight-plus-hotel package product
+    - TUI UK - vertically integrated tour operator with own airline
+    - easyJet holidays - carrier-owned dynamic packager on the same short-haul routes
+    - loveholidays - closest direct UK online-only dynamic packaging competitor
+    - Expedia and Booking.com - global OTAs offering packages into the same UK source
+      market
+    - Hays Travel and other high-street agents selling equivalent ATOL packages
+    reasoning: |
+      For a consumer there is no lock-in whatsoever. On the Beach holds no
+      exclusive inventory: the 42 airlines and 24k hotels it sells are the same
+      supply its competitors buy from the same bedbanks and carriers. The FY25
+      results themselves acknowledge the substitutability - "Consumers are
+      shopping around as much as ever so we are having to reacquire them" - and
+      the entire "stickiness" strategy pillar exists precisely because
+      switching cost is near zero. For a developer the question is moot: there
+      is no integration to switch away from.
+  exitPath:
+    value: no-export-published
+    operationCited: none
+    evidence: |
+      No export, dump, bulk, reporting or data-portability operation is
+      published, because no API exists. On the Beach is a UK data controller and
+      UK GDPR Article 20 portability rights apply to its customers as a matter
+      of law, but no implemented self-serve export mechanism could be verified.
+      https://www.onthebeach.co.uk/privacy is listed in the site's own
+      main_pages.xml sitemap but returned HTTP 403 to automated retrieval on
+      2026-07-28, so no portability commitment could be read or quoted. Recorded
+      as no-export-published rather than export-on-request because nothing was
+      actually verified.
+  identifierPortability:
+    value: >-
+      Industry-portable identifiers on the inbound side only - IATA airline
+      designators and IATA airport codes across 42 carriers, plus CAA ATOL
+      licence numbers and ATOL certificates on the consumer side. Outbound there
+      is nothing: booking references, hotel records and price rows live in the
+      proprietary Hotel Discovery Cache and Fast Flexible Search in-memory store,
+      keyed by internal supplier and inventory IDs that are never published.
+    evidence: |
+      IATA airport/airline codes are implied throughout the consumer product and
+      the FY25 "Airlines on sale: 42" and "Destinations on sale: 240" metrics.
+      ATOL is confirmed in the FY25 accounts ("All ATOL protected customer monies
+      are held in a trust account"). No PNR record locator, IATA/ARC agency
+      number, GDS record ID, hotel chain code or GIATA ID is exposed publicly,
+      because no interface exposes anything. On the Beach holds no IATA/ARC
+      accreditation of its own - it is not a ticketing agency; it buys seats
+      through direct carrier connections and consolidators.
+  contractualLockIn:
+    value: nothing published
+    evidence: |
+      No developer terms, partner agreement, API licence, rate card, minimum
+      term, exclusivity clause, full-content agreement, segment fee or
+      termination-notice provision is published anywhere by On the Beach,
+      because there is no developer or partner programme to govern.
+
+      Consumer-facing terms do exist at
+      https://www.onthebeach.co.uk/terms-and-conditions,
+      /package-holiday-terms-and-conditions and /hotel-only-terms-and-conditions
+      (all present in the site's own main_pages.xml sitemap) but all returned
+      HTTP 403 to automated retrieval on 2026-07-28, so no clause is quoted
+      here. Nothing in these is a developer-facing commercial term in any case.
+
+      The nearest thing to a partner contract is the affiliate programme, and
+      even that is not On the Beach's own paper: affiliates contract with the
+      Partnerize and Awin networks, whose terms and tracking interfaces govern
+      the relationship. /affiliates returned HTTP 200 but the page body was
+      blocked by the same Cloudflare challenge, and
+      https://ui.awin.com/merchant-profile/3655 returned HTTP 404.
+  accessGate:
+    value: none-published
+    whatADeveloperMustSign: |
+      Nothing, because nothing is on offer. There is no signup, no key issuance,
+      no sandbox, no application form, no approval queue, no partner login and
+      no commercial-agreement route to an On the Beach API. The only third-party
+      relationship a developer can enter is publisher affiliation via Partnerize
+      or Awin, which grants tracking links and marketing creative - not data
+      access, not inventory, not booking capability.
+    gated: true
+    gateType: no surface exists to gate
+  distributionModel:
+    value: aggregator-reseller
+    reasoning: |
+      On the Beach occupies the aggregator/reseller seat: it aggregates
+      third-party airline seats and third-party hotel beds and resells them as
+      its own ATOL-protected packages. It reaches its own customers
+      direct-to-consumer only - onthebeach.co.uk, sunshine.co.uk and the mobile
+      app, with affiliate networks as a marketing channel rather than a
+      distribution API. It has no channel-manager, GDS, wholesale or white-label
+      outbound distribution, and the last B2B route it had was closed in
+      September 2025.
+    inboundSupply:
+    - Direct airline connections, including a Ryanair "Approved OTA" commercial
+      partnership signed in FY24 that the company credits with trebling addressable
+      market "from 16m pax to 50m pax"
+    - Emirates NDC "Online B2B" API direct connect, taken in January 2019, reported
+      at the time as the first such connection by a UK OTA
+    - Bedbank inventory plus direct hotel contracting, 24k hotels on sale in FY25
+    - No GDS. On the Beach does not distribute through or source through Amadeus, Sabre
+      or Travelport.
+  ndcPosture:
+    value: >-
+      NDC consumer, not NDC provider. On the Beach holds no IATA NDC
+      certification level (it is not a carrier and not an IATA-accredited agent),
+      publishes no NDC endpoint, and imposes no surcharges. It is on the buying
+      end: it took Emirates' NDC-based Online B2B API as a direct connect in
+      January 2019, reported at the time as the first UK OTA to do so, and
+      layered a direct Ryanair Approved OTA connection on top in 2024. Both
+      route around the GDS entirely, which is the structural point - On the Beach
+      is one of the UK demand-side businesses whose economics depend on NDC and
+      direct-connect succeeding against GDS intermediation.
+    ndcApiPublished: false
+    gdsSurcharges: not applicable
+    certificationClaimed: none found
+  standardConformance:
+    value: no standard reference found
+    evidence: |
+      No OpenTravel/OTA, HTNG, IATA NDC, OpenAPI, AsyncAPI, JSON Schema or
+      Arazzo artifact is published under On the Beach's name. The only standards
+      visible in the corpus are inbound supplier schemas it consumes privately.
+  whatItCostsToLeave: |
+    Almost nothing, and that is the finding. On the Beach has inverted the
+    sector's normal shape: it is a business built ENTIRELY on other people's
+    switching costs falling, not on raising its own. Because it publishes no
+    interface, there is no integration for anyone to be locked into; because it
+    holds no exclusive inventory, its consumers can rebook the identical holiday
+    elsewhere; and because its supply is direct-connect and NDC rather than GDS,
+    it deliberately sits outside the forty-year intermediation structure that
+    creates lock-in for everyone else. The company's exposure is therefore the
+    mirror image: its own switching cost is what it must manufacture, which is
+    exactly what the "stickiness" strategy pillar, the app push and the 2+
+    customer metric are for. For the Kin Score this is the case that shows a
+    zero-lock-in profile is not automatically a good API posture - it is here a
+    symptom of publishing nothing at all.
+sources:
+- url: https://www.onthebeachgroupplc.com/
+  status: 200
+  fetched: '2026-07-28'
+  type: Website
+  note: Corporate/investor site. No developer, technology or API section exists in
+    the sitemap.
+- url: https://www.onthebeachgroupplc.com/sitemap.xml
+  status: 200
+  fetched: '2026-07-28'
+  type: Sitemap
+  note: 43 URLs, all corporate/IR. No /developers, /api, /docs or /technology entry.
+- url: https://www.onthebeachgroupplc.com/about-us/who-we-are
+  status: 200
+  fetched: '2026-07-28'
+  type: About
+  note: '"one of the UK''s largest online package holiday specialists", founded 2004
+    by Simon Cooper, "proprietary technology platform", "asset-light, and cash-generative
+    business model", 1.7 million customers in 2025.'
+- url: https://www.onthebeachgroupplc.com/about-us/strategy
+  status: 200
+  fetched: '2026-07-28'
+  type: Strategy
+  note: Four strategy pillars (stickiness, choice, peace of mind, scale and automation).
+    No API, NDC, direct-connect or supplier-integration reference.
+- url: https://www.onthebeachgroupplc.com/~/media/Files/O/On-The-Beach/investor-docs/results-and-presentations/on-the-beach-group-final-results-2025.pdf
+  status: 200
+  fetched: '2026-07-28'
+  type: AnnualReport
+  note: 'FY25 final results, published 2 December 2025. Primary evidence for: API-first
+    microservices architecture; Hotel Discovery Cache; Fast Flexible Search; Ryanair
+    partnership and addressable market trebling; abandonment of Classic Collection
+    on 23 September 2025; ATOL trust accounting; registered office; LSE listing.'
+- url: https://www.onthebeachgroupplc.com/investor-centre/business-model
+  status: 200
+  fetched: '2026-07-28'
+  type: BusinessModel
+  note: Served as a PDF rather than an HTML page; not machine-parseable in place.
+- url: https://www.onthebeach.co.uk/
+  status: 403
+  fetched: '2026-07-28'
+  type: ConsumerWebsite
+  note: Cloudflare bot challenge on HTML documents. Static assets on the same host
+    returned 200.
+- url: https://www.onthebeach.co.uk/robots.txt
+  status: 200
+  fetched: '2026-07-28'
+  type: Robots
+  note: 'Disallows internal search and checkout paths (/flight_searches/, /hotel_searches/,
+    /searches/, /basket/, /checkout/, /booking/, /ajax/, /helios_deals/). No developer,
+    api or docs path is referenced. Sitemap: https://www.onthebeach.co.uk/sitemap.xml'
+- url: https://www.onthebeach.co.uk/sitemap.xml
+  status: 200
+  fetched: '2026-07-28'
+  type: Sitemap
+  note: Index pointing at main_pages.xml and hotel_properties.xml only.
+- url: https://www.onthebeach.co.uk/main_pages.xml
+  status: 200
+  fetched: '2026-07-28'
+  type: Sitemap
+  note: 860KB of consumer destination and legal pages. Contains /terms-and-conditions,
+    /privacy, /cookie-policy, /package-holiday-terms-and-conditions, /hotel-only-terms-and-conditions.
+    Contains no developer, API, partner or trade page.
+- url: https://www.onthebeach.co.uk/affiliates
+  status: 200
+  fetched: '2026-07-28'
+  type: AffiliateProgram
+  note: Page exists; body blocked by Cloudflare challenge on retrieval. Programme is
+    run through the Partnerize and Awin networks, not on On the Beach's own contract.
+- url: https://github.com/onthebeach
+  status: 200
+  fetched: '2026-07-28'
+  type: GitHubOrganization
+  note: 24 public repositories, all small internal Ruby/Rails libraries (daodalus,
+    catcher, armoire, structural, card_validation, rack_google_tag_manager). Most recent
+    push 2018-10-05. No API specification, SDK or client for any On the Beach product
+    API.
+- url: https://www.linkedin.com/company/on-the-beach
+  status: 200
+  fetched: '2026-07-28'
+  type: LinkedIn
+- url: https://onthebeachgroup.com/
+  status: 000
+  fetched: '2026-07-28'
+  type: Domain
+  note: Assigned primary domain. Resolves to 80.92.65.215 but refuses HTTPS (connection
+    refused on 443); plain HTTP returns 200 with an empty XHTML stub containing no
+    content. The live corporate site is onthebeachgroupplc.com.
+- url: https://www.classicpackageholidays.co.uk/
+  status: 530
+  fetched: '2026-07-28'
+  type: TradePortal
+  note: Former self-service agent portal. Cloudflare 530 - origin unreachable, consistent
+    with the September 2025 wind-down of the B2B segment.
+- url: https://classicpackageholidays.com
+  status: 530
+  fetched: '2026-07-28'
+  type: TradePortal
+- url: https://www.classic-collection.co.uk/
+  status: 200
+  fetched: '2026-07-28'
+  type: BrandSite
+  note: Still resolving; HTML retrieval blocked by Cloudflare. Brand is in orderly
+    wind-down per FY25 accounts.
+- url: https://www.sunshine.co.uk/
+  status: 403
+  fetched: '2026-07-28'
+  type: BrandSite
+- url: https://www.phocuswire.com/On-the-Beach-Emirates-NDC
+  status: 403
+  fetched: '2026-07-28'
+  type: PressCoverage
+  note: Trade report of the January 2019 Emirates Online B2B NDC direct connection.
+    Retrieval blocked; recorded as secondary corroboration only, not as a primary artifact.
+- url: https://www.sec.gov/Archives/edgar/data/1038683/000165495424002210/a6001e.htm
+  status: 403
+  fetched: '2026-07-28'
+  type: RegulatoryFiling
+  note: Ryanair Holdings 6-K announcing the On the Beach Approved OTA partnership (February
+    2024). Retrieval blocked; the partnership itself is independently confirmed in
+    On the Beach's own FY25 accounts.
+- url: https://ui.awin.com/merchant-profile/3655
+  status: 404
+  fetched: '2026-07-28'
+  type: AffiliateNetwork
+actions:
+  apisListed: 0
+  openapiDirectoryCreated: false
+  reason: |
+    apis[] is empty and no openapi/ directory was created. Nothing real was
+    found to save. On the Beach publishes no API, no specification and no
+    developer documentation of any kind. Creating placeholder specs would be
+    fabrication.
+  recommendedRescan: >-
+    Re-probe if On the Beach ever ships the ChatGPT/Gemini integration its FY25
+    results describe as "enabling direct integration into ChatGPT, Gemini, and
+    emerging AI platforms" - that would be the first moment any part of its
+    API-first architecture becomes externally addressable, and the first thing
+    worth harvesting.
