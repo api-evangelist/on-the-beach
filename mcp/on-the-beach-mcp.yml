@@ -1,0 +1,104 @@
+generated: '2026-07-28'
+method: searched
+status: published-gated
+confidence: medium
+summary: >-
+  On the Beach shipped a ChatGPT App on 1 April 2026, claiming to be the first
+  UK online travel agent to connect to ChatGPT Apps. ChatGPT Apps are served by
+  an MCP server (OpenAI Apps SDK), so this is On the Beach's first externally
+  addressable machine surface — and it is the first thing the company has ever
+  exposed beyond the consumer website. It is distribution-gated, not developer
+  self-serve: the only way to reach it is to add the app inside ChatGPT. No
+  endpoint, tool list, input schema, auth flow or terms are documented publicly
+  by On the Beach, and there is no developer portal behind it.
+server:
+  name: On the Beach
+  invocation: '@On the Beach inside ChatGPT (ChatGPT Apps directory)'
+  transport: http
+  url: null
+  endpoint_candidate: https://mcp.onthebeach.co.uk/
+  endpoint_evidence: >-
+    mcp.onthebeach.co.uk resolves (A 104.17.18.115 / 104.17.19.115, Cloudflare
+    proxied) on both 1.1.1.1 and 8.8.8.8 and serves TLSv1.3 with the
+    onthebeach.co.uk certificate (SAN onthebeach.co.uk, *.onthebeach.co.uk,
+    *.staging.onthebeach.co.uk, Google Trust Services WE1, expires
+    2026-10-02). It is NOT a wildcard artefact: foo/chat/agent/ai/api
+    .onthebeach.co.uk all return NXDOMAIN, so the record was created
+    deliberately. The host is not confirmed by On the Beach as the MCP endpoint
+    — that binding is inference from the hostname plus the shipped ChatGPT App.
+  gated: true
+  gate: >-
+    Cloudflare WAF. GET / and POST {"jsonrpc":"2.0","method":"tools/list"} both
+    return HTTP 403 "Attention Required | Cloudflare" with browser headers, an
+    Origin header and Accept: application/json, text/event-stream. No JSON-RPC
+    response of any kind was observed.
+tools: []
+tools_note: >-
+  NOT CAPTURED. tools/list is WAF-blocked and On the Beach publishes no tool
+  list, so no tool names or inputSchemas are recorded here. Recording invented
+  tool names would be fabrication. The published product description implies a
+  conversational holiday-search capability returning live, bookable package
+  combinations with a direct booking deep link, but the actual tool surface is
+  unverified.
+capabilities_described:
+- Natural-language holiday search ("somewhere I can chase the sun next week")
+- Live package pricing and availability generated from millions of flight+hotel
+  combinations
+- Conversational refinement through follow-up questions
+- Direct booking deep link back to onthebeach.co.uk
+authentication: not documented
+pricing: not documented
+terms: not documented
+probes:
+- url: https://mcp.onthebeach.co.uk/
+  method: GET
+  status: 403
+  date: '2026-07-28'
+- url: https://mcp.onthebeach.co.uk/
+  method: POST tools/list
+  status: 403
+  date: '2026-07-28'
+- url: https://mcp.onthebeach.co.uk/mcp
+  method: POST tools/list
+  status: 403
+  date: '2026-07-28'
+- url: https://mcp.onthebeach.co.uk/sse
+  method: POST tools/list
+  status: 403
+  date: '2026-07-28'
+- url: https://mcp.onthebeach.co.uk/v1/mcp
+  method: POST tools/list
+  status: 403
+  date: '2026-07-28'
+sources:
+- url: https://www.travolution.com/news/on-the-beach-announces-chatgpt-apps-integration-for-holiday-search/
+  date: '2026-04-01'
+  type: PressCoverage
+  note: >-
+    "the first UK online travel agent to connect to ChatGPT Apps". Customers add
+    On the Beach in ChatGPT Apps then tag @On the Beach to search. Quotes Gemma
+    Lapington, Group Product Manager.
+- url: https://travelweekly.co.uk/news/on-the-beach-first-uk-ota-to-integrate-chatgbt-for-live-holiday-search
+  date: '2026-04-01'
+  type: PressCoverage
+  note: >-
+    Independent second report of the same launch — "live inside ChatGPT",
+    millions of available holiday combinations, live bookable package deals.
+- url: https://www.onthebeachgroupplc.com/~/media/Files/O/On-The-Beach/investor-docs/results-and-presentations/on-the-beach-group-final-results-2025.pdf
+  date: '2025-12-02'
+  type: AnnualReport
+  note: >-
+    FY25 final results foreshadowed exactly this: "We have spent 3 years
+    building AI ready tech. Our API-first microservices architecture is enabling
+    direct integration into ChatGPT, Gemini, and emerging AI platforms."
+first_party_confirmation: >-
+  Not found. onthebeachgroupplc.com/media is a press-contact page with no
+  releases, /investor-centre/rns did not render an announcement list to
+  automated retrieval, and no ChatGPT or AI landing page appears in the
+  consumer sitemap (4,146 URLs in main_pages.xml). Both trade reports are dated
+  1 April 2026 and are the only public record found.
+rescan: >-
+  Re-probe mcp.onthebeach.co.uk for a JSON-RPC response, and watch for a
+  Gemini/other-platform equivalent. If the WAF ever answers tools/list, capture
+  the real tool list with inputSchemas and emit mcp/on-the-beach-tool-crosswalk.yml
+  (currently impossible — there is no public OpenAPI to crosswalk against).

@@ -16,15 +16,19 @@ description: >-
   publisher of its own - it was the first UK OTA to take a direct NDC connection
   to Emirates' Online B2B API in 2019 and signed a direct Ryanair "Approved OTA"
   partnership in 2024 - and it explicitly bypasses the GDS layer entirely. Its
-  API posture as a producer is honestly non-existent. The FY25 results describe
-  an "API-first microservices architecture" and a proprietary Hotel Discovery
-  Cache managing more than 5 billion hotel prices, but none of that surface is
+  API posture as a producer is almost non-existent. The FY25 results describe an
+  "API-first microservices architecture" and a proprietary Hotel Discovery Cache
+  managing more than 5 billion hotel prices, but none of that surface is
   published: there is no developer portal, no API documentation, no OpenAPI or
   other machine-readable contract, no partner or trade API, and no self-serve
   access of any kind. Its only remaining B2B channel, Classic Collection, was put
-  into orderly wind-down on 23 September 2025. Public docs do not exist, there is
-  no published exit path, and every probed developer subdomain and contract path
-  returned 404 or did not resolve.
+  into orderly wind-down on 23 September 2025. The single exception, and the
+  first externally addressable machine surface the company has ever shipped, is
+  a ChatGPT App launched on 1 April 2026 - claimed as the first by a UK OTA -
+  which serves live, bookable package combinations to ChatGPT users over MCP.
+  That surface is distribution-gated rather than developer-facing: no endpoint,
+  tool list, schema, auth flow or terms are documented, and a deliberate
+  mcp.onthebeach.co.uk host exists but is Cloudflare WAF-blocked to every probe.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Travel
@@ -39,11 +43,34 @@ tags:
 - NDC
 - Hotels
 - Hospitality
+- MCP
+- Artificial Intelligence
 created: '2026-07-28'
 modified: '2026-07-28'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: MCPServer
+  name: On the Beach ChatGPT App (MCP, distribution-gated)
+  url: mcp/on-the-beach-mcp.yml
+- type: WellKnown
+  url: well-known/on-the-beach-well-known.yml
+- type: LLMsTxt
+  url: llms/on-the-beach-llms.txt
+- type: Packages
+  url: packages/on-the-beach-packages.yml
+- type: DomainSecurity
+  url: security/on-the-beach-domain-security.yml
+- type: Support
+  name: Help centre
+  url: https://help.onthebeach.co.uk/hc/en-gb
+- type: TermsOfService
+  url: https://www.onthebeach.co.uk/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.onthebeach.co.uk/privacy
+- type: AffiliateProgram
+  name: Affiliate programme (Partnerize / Awin)
+  url: https://www.onthebeach.co.uk/affiliates
 - type: Website
   url: https://www.onthebeachgroupplc.com/
 - type: ConsumerWebsite

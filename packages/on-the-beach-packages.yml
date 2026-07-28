@@ -1,0 +1,113 @@
+generated: '2026-07-28'
+method: searched
+source: https://rubygems.org + https://github.com/onthebeach
+note: >-
+  On the Beach publishes no API client library, because it publishes no API.
+  The packages below are real, first-party, publicly released open-source Ruby
+  gems from the github.com/onthebeach organisation — internal engineering
+  utilities (MongoDB query DSL, config, value objects, Rack middleware), not
+  SDKs for any On the Beach product. All are dormant: the most recent push to
+  the organisation was 2018-10-05. No npm, PyPI, Maven Central, NuGet,
+  pkg.go.dev, Packagist or crates.io package was found under any On the Beach
+  name. No `SDKs` pointer is wired in apis.yml because none of these is an API
+  client.
+api_client_libraries: []
+packages:
+- language: ruby
+  registry: rubygems
+  name: structural
+  version: 0.2.0
+  url: https://rubygems.org/gems/structural
+  repository: https://github.com/onthebeach/structural
+  install: gem install structural
+  official: true
+  api_client: false
+  downloads: 62092
+  description: Simple models based on hashes; a cut-down fork of the Id gem developed
+    at On the Beach Ltd.
+- language: ruby
+  registry: rubygems
+  name: google_fish
+  version: 0.2.2
+  url: https://rubygems.org/gems/google_fish
+  repository: https://github.com/onthebeach/google_fish
+  install: gem install google_fish
+  official: true
+  api_client: false
+  downloads: 53866
+  description: Thin wrapper making the Google Translate v2 API trivial to call (a
+    client for Google's API, not for On the Beach's).
+- language: ruby
+  registry: rubygems
+  name: armoire
+  version: 1.4.1
+  url: https://rubygems.org/gems/armoire
+  repository: https://github.com/onthebeach/armoire
+  install: gem install armoire
+  official: true
+  api_client: false
+  downloads: 36061
+  description: Simple configuration tool for Ruby application settings.
+- language: ruby
+  registry: rubygems
+  name: rack_google_tag_manager
+  version: 1.0.3
+  url: https://rubygems.org/gems/rack_google_tag_manager
+  repository: https://github.com/onthebeach/rack_google_tag_manager
+  install: gem install rack_google_tag_manager
+  official: true
+  api_client: false
+  downloads: 18826
+  description: Rack middleware that injects the Google Tag Manager snippet into a
+    Rack application.
+- language: ruby
+  registry: rubygems
+  name: open_graphy
+  version: 1.0.1
+  url: https://rubygems.org/gems/open_graphy
+  repository: https://github.com/onthebeach/open_graphy
+  install: gem install open_graphy
+  official: true
+  api_client: false
+  downloads: 7308
+  description: Ruby wrapper for retrieving Open Graph protocol data.
+- language: ruby
+  registry: rubygems
+  name: daodalus
+  version: 0.1.1
+  url: https://rubygems.org/gems/daodalus
+  repository: https://github.com/onthebeach/daodalus
+  install: gem install daodalus
+  official: true
+  api_client: false
+  downloads: 5505
+  description: DSL for building MongoDB queries, updates and aggregations.
+- language: ruby
+  registry: rubygems
+  name: daodalus-moped
+  version: 0.0.1
+  url: https://rubygems.org/gems/daodalus-moped
+  repository: https://github.com/onthebeach/daodalus-moped
+  install: gem install daodalus-moped
+  official: true
+  api_client: false
+  downloads: 4695
+  description: Daodalus adapter for the Moped MongoDB driver.
+related_but_not_org_owned:
+- name: id
+  url: https://rubygems.org/gems/id
+  note: >-
+    "Originally developed at On the Beach" per its own description, but released
+    under github.com/rsslldnphy (an On the Beach engineer), not the company org.
+- name: optional
+  url: https://rubygems.org/gems/optional
+  note: Same author (rsslldnphy); mirrored into the onthebeach GitHub org.
+registries_checked:
+- {registry: rubygems, result: 7 first-party gems}
+- {registry: npm, result: none}
+- {registry: pypi, result: none}
+- {registry: maven-central, result: none}
+- {registry: nuget, result: none}
+- {registry: pkg.go.dev, result: none}
+- {registry: packagist, result: none}
+- {registry: crates.io, result: none}

@@ -26,7 +26,21 @@ On the Beach Group plc (LSE: OTB) is a Manchester-headquartered online travel ag
 
 ## APIs
 
-No public APIs are listed. On the Beach Group publishes no developer portal, no API documentation, and no machine-readable API contract. Every developer subdomain (`developer.`, `api.`, `docs.`) fails to resolve, and `/openapi.json`, `/llms.txt` and `/.well-known/*` return HTTP 404 on the consumer host. See [review.yml](review.yml) for the full probe log.
+No public APIs are listed. On the Beach Group publishes no developer portal, no API documentation, and no machine-readable API contract. Every developer subdomain (`developer.`, `api.`, `docs.`) fails to resolve, and `/openapi.json` and `/llms.txt` do not exist on any host. See [review.yml](review.yml) for the full probe log.
+
+**One exception, found on 2026-07-28.** On the Beach launched a **ChatGPT App on 1 April 2026** — reported as the first by a UK OTA — which serves live, bookable holiday package combinations to ChatGPT users conversationally, with a booking deep link back to onthebeach.co.uk. ChatGPT Apps are served over **MCP**, making this the first externally addressable machine surface the company has ever shipped, and the delivery of the "direct integration into ChatGPT, Gemini, and emerging AI platforms" its FY25 results promised. It is distribution-gated, not developer-facing: no endpoint, tool list, input schema, auth flow, rate limit or terms is documented. A deliberate `mcp.onthebeach.co.uk` host exists (real DNS record, valid TLS, not a wildcard) but every request — including `tools/list` — is answered by the Cloudflare WAF with HTTP 403, so no tool was captured. See [mcp/on-the-beach-mcp.yml](mcp/on-the-beach-mcp.yml).
+
+Certificate transparency shows the private side of the same architecture: certificates issued for `api.onthebeach.co.uk`, `api.sandbox1-8.onthebeach.co.uk`, `uapi.sandbox1-8.onthebeach.co.uk` and `otb-payments-notifications-api.staging.onthebeach.co.uk` — all of which now return NXDOMAIN to public DNS.
+
+## Artifacts
+
+| Artifact | File | Method |
+| --- | --- | --- |
+| MCP server | [mcp/on-the-beach-mcp.yml](mcp/on-the-beach-mcp.yml) | searched + probed |
+| Well-known | [well-known/on-the-beach-well-known.yml](well-known/on-the-beach-well-known.yml) | searched |
+| Packages | [packages/on-the-beach-packages.yml](packages/on-the-beach-packages.yml) | searched |
+| llms.txt | [llms/on-the-beach-llms.txt](llms/on-the-beach-llms.txt) | generated |
+| Domain security | [security/on-the-beach-domain-security.yml](security/on-the-beach-domain-security.yml) | probed |
 
 ## Switching Cost
 
@@ -52,6 +66,10 @@ No public APIs are listed. On the Beach Group publishes no developer portal, no 
 - [GitHub Organization](https://github.com/onthebeach)
 - [LinkedIn](https://www.linkedin.com/company/on-the-beach)
 - [Contact](https://www.onthebeachgroupplc.com/contact)
+- [Support (Zendesk help centre)](https://help.onthebeach.co.uk/hc/en-gb)
+- [Terms of Service](https://www.onthebeach.co.uk/terms-and-conditions)
+- [Privacy Policy](https://www.onthebeach.co.uk/privacy)
+- [Affiliate Program (Partnerize / Awin)](https://www.onthebeach.co.uk/affiliates)
 
 ## Maintainers
 

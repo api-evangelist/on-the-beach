@@ -1,0 +1,82 @@
+generated: '2026-07-28'
+method: searched
+source: live probes of the /.well-known/ surface on every On the Beach host
+note: >-
+  On the Beach publishes no API discovery documents. The only /.well-known/
+  resources that return 200 are the two mobile app-association files served by
+  the consumer booking host (www.onthebeach.co.uk) for iOS Universal Links and
+  Android App Links. There is no security.txt, no api-catalog, no
+  openid-configuration, no oauth-authorization-server and no ai-plugin.json on
+  any host. HTTP 403 responses below are the Cloudflare bot challenge that
+  fronts every onthebeach.co.uk and sunshine.co.uk request, not evidence of a
+  protected document; the same challenge did NOT block the two files that do
+  exist, which is why they returned 200.
+hosts:
+- host: https://www.onthebeach.co.uk
+  documents:
+  - path: /.well-known/apple-app-site-association
+    status: 200
+    content_type: application/json
+    file: on-the-beach-apple-app-site-association.json
+    note: >-
+      Apple Universal Links. Team ID 3483CY3Y7D, bundle IDs
+      uk.co.onthebeach.ios.app plus .dev/.alpha/.beta build variants, and an
+      "iterable" entry (Iterable marketing deep links). Excludes /u/*, basket,
+      booking, checkout, extras and results paths from app handling.
+  - path: /.well-known/assetlinks.json
+    status: 200
+    content_type: application/json
+    file: on-the-beach-assetlinks.json
+    note: >-
+      Android App Links, delegate_permission/common.handle_all_urls for package
+      onthebeach.onthebeachapp.
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/change-password
+    status: 403
+  - path: /security.txt
+    status: 403
+  - path: /openapi.json
+    status: 403
+  - path: /llms.txt
+    status: 403
+- host: https://www.onthebeachgroupplc.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/apple-app-site-association
+    status: 403
+  - path: /robots.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+- host: https://www.sunshine.co.uk
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/apple-app-site-association
+    status: 403
+  - path: /.well-known/assetlinks.json
+    status: 403
+  - path: /llms.txt
+    status: 403
+- host: https://mcp.onthebeach.co.uk
+  documents:
+  - path: /
+    status: 403
+    note: >-
+      Cloudflare WAF block page ("Attention Required"). Host resolves and serves
+      a valid TLS certificate — see mcp/on-the-beach-mcp.yml.
+security_txt: false
+api_catalog: false
+oauth_metadata: false

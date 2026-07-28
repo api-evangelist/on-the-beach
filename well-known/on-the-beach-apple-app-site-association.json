@@ -1,0 +1,79 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "3483CY3Y7D.uk.co.onthebeach.ios.app.dev",
+                "paths": [
+                    "NOT /u/*",
+                    "NOT */basket/*",
+                    "NOT */booking/*",
+                    "NOT */checkout/*",
+                    "NOT */extras/*",
+                    "NOT */results*",
+                    "NOT */ref=no_banner*",
+                    "*",
+                    "/a/*"
+                ]
+            },
+            {
+                "appID": "3483CY3Y7D.uk.co.onthebeach.ios.app.alpha",
+                "paths": [
+                    "NOT /u/*",
+                    "NOT */basket/*",
+                    "NOT */booking/*",
+                    "NOT */checkout/*",
+                    "NOT */extras/*",
+                    "NOT */results*",
+                    "NOT */ref=no_banner*",
+                    "*",
+                    "/a/*"
+                ]
+            },
+            {
+                "appID": "3483CY3Y7D.uk.co.onthebeach.ios.app.beta",
+                "paths": [
+                    "NOT /u/*",
+                    "NOT */basket/*",
+                    "NOT */booking/*",
+                    "NOT */checkout/*",
+                    "NOT */extras/*",
+                    "NOT */results*",
+                    "NOT */ref=no_banner*",
+                    "*",
+                    "/a/*"
+                ]
+            },
+            {
+                "appID": "3483CY3Y7D.uk.co.onthebeach.ios.app",
+                "paths": [
+                    "NOT /u/*",
+                    "NOT */basket/*",
+                    "NOT */booking/*",
+                    "NOT */checkout/*",
+                    "NOT */extras/*",
+                    "NOT */results*",
+                    "NOT */ref=no_banner*",
+                    "*",
+                    "/a/*"
+                ]
+            },
+            {
+                "appID": "iterable",
+                "paths": [
+                    "NOT /u/*",
+                    "*",
+                    "/a/*"
+                ]
+            }
+        ]
+    },
+    "webcredentials": {
+        "apps": [
+            "3483CY3Y7D.uk.co.onthebeach.ios.app.dev",
+            "3483CY3Y7D.uk.co.onthebeach.ios.app.alpha",
+            "3483CY3Y7D.uk.co.onthebeach.ios.app.beta",
+            "3483CY3Y7D.uk.co.onthebeach.ios.app"
+        ]
+    }
+}

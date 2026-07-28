@@ -377,6 +377,109 @@ sources:
   status: 404
   fetched: '2026-07-28'
   type: AffiliateNetwork
+addendum:
+- date: '2026-07-28'
+  round: enrichment 2026-07-28
+  supersedes: >-
+    The findings.summary line "no llms.txt, no .well-known catalogue and no MCP
+    surface" is now partly wrong. A deeper contract-discovery pass (browser
+    user-agent, certificate transparency, per-subdomain DNS) found a real,
+    externally addressable machine surface and a real /.well-known/ surface.
+    Everything else in this review stands: still no OpenAPI, no GraphQL, no
+    AsyncAPI, no developer portal, no docs, no partner API and no self-serve
+    access.
+  finds:
+  - kind: MCPServer
+    what: >-
+      On the Beach shipped a ChatGPT App on 1 April 2026, reported by
+      Travolution and Travel Weekly as the first UK OTA to connect to ChatGPT
+      Apps. Users add the app and tag "@On the Beach" to search live package
+      combinations conversationally and receive a direct booking deep link.
+      ChatGPT Apps are served over MCP (OpenAI Apps SDK), so this is the
+      company's first machine-consumable surface - exactly the "direct
+      integration into ChatGPT, Gemini, and emerging AI platforms" the FY25
+      results promised, and the trigger condition this review's own
+      recommendedRescan named.
+    artifact: mcp/on-the-beach-mcp.yml
+    gated: true
+    caveats: >-
+      Distribution-gated, not developer-facing. No endpoint, tool list,
+      inputSchema, auth flow, rate limit, pricing or terms is published. No
+      first-party press release was retrievable (onthebeachgroupplc.com/media is
+      a press-contact page; the RNS list did not render to automated retrieval),
+      so both sources are trade press dated 1 April 2026.
+  - kind: Host
+    what: >-
+      mcp.onthebeach.co.uk resolves on both 1.1.1.1 and 8.8.8.8 to Cloudflare
+      (104.17.18.115 / 104.17.19.115) and serves TLSv1.3 with the
+      onthebeach.co.uk certificate (Google Trust Services WE1, SANs
+      onthebeach.co.uk, *.onthebeach.co.uk, *.staging.onthebeach.co.uk). It is
+      not a wildcard artefact - foo/chat/agent/ai/api.onthebeach.co.uk are all
+      NXDOMAIN - so the record was created deliberately. GET / and POST
+      tools/list (with browser headers and Accept: application/json,
+      text/event-stream) return HTTP 403 "Attention Required | Cloudflare" at
+      /, /mcp, /sse and /v1/mcp. No JSON-RPC response was ever observed, so the
+      binding of this host to the ChatGPT App is inference, recorded at medium
+      confidence.
+  - kind: WellKnown
+    what: >-
+      Two /.well-known/ documents return HTTP 200 on www.onthebeach.co.uk when
+      requested with a browser user-agent -
+      /.well-known/apple-app-site-association (Apple Team ID 3483CY3Y7D, bundle
+      uk.co.onthebeach.ios.app plus dev/alpha/beta variants and an Iterable
+      entry) and /.well-known/assetlinks.json (Android package
+      onthebeach.onthebeachapp). Both saved verbatim. Nothing API-related: no
+      security.txt, no api-catalog, no OAuth/OIDC metadata, no ai-plugin.json on
+      any host.
+    artifact: well-known/on-the-beach-well-known.yml
+  - kind: Packages
+    what: >-
+      Seven first-party RubyGems published from github.com/onthebeach
+      (structural 62k downloads, google_fish, armoire, rack_google_tag_manager,
+      open_graphy, daodalus, daodalus-moped). All are internal engineering
+      utilities, none is an API client, and the newest release predates 2019. No
+      npm, PyPI, Maven, NuGet, Go, Packagist or crates.io package exists. No
+      SDKs pointer was wired because there is no API to client.
+    artifact: packages/on-the-beach-packages.yml
+  - kind: Support
+    what: >-
+      help.onthebeach.co.uk is a Zendesk-hosted help centre (CNAME
+      onthebeachuk.zendesk.com), redirecting to /hc/en-gb. Consumer support, but
+      a real published support channel; wired as type Support.
+  - kind: InternalSurface
+    what: >-
+      Certificate transparency (crt.sh) returns 97 names under onthebeach.co.uk
+      and 40 under sunshine.co.uk, including api.onthebeach.co.uk,
+      www.api.onthebeach.co.uk, api.sandbox1-8.onthebeach.co.uk,
+      uapi.sandbox1-8.onthebeach.co.uk, *.staging, *.testing, *.dev, sandbox1-8
+      and otb-payments-notifications-api.staging.onthebeach.co.uk. This is
+      independent corroboration that the "API-first microservices architecture"
+      is real - certificates were issued for named API and per-sandbox hosts -
+      and equally that it is entirely private: every one of those hostnames now
+      returns NXDOMAIN to public DNS. The only public entries in the same zone
+      are www, m, i, echo, assets, help (Zendesk), careers (Teamtailor),
+      beachhut (LumApps intranet), askalison and mcp.
+  probes:
+  - {url: 'https://www.onthebeach.co.uk/.well-known/apple-app-site-association', status: 200}
+  - {url: 'https://www.onthebeach.co.uk/.well-known/assetlinks.json', status: 200}
+  - {url: 'https://mcp.onthebeach.co.uk/', status: 403, note: Cloudflare WAF}
+  - {url: 'https://mcp.onthebeach.co.uk/mcp', status: 403, note: 'POST tools/list'}
+  - {url: 'https://mcp.onthebeach.co.uk/sse', status: 403, note: 'POST tools/list'}
+  - {url: 'https://mcp.onthebeach.co.uk/v1/mcp', status: 403, note: 'POST tools/list'}
+  - {url: 'https://help.onthebeach.co.uk/', status: 403, note: 'redirects to /hc/en-gb (Zendesk)'}
+  - {url: 'https://www.onthebeachgroupplc.com/media', status: 200, note: 'press-contact page only, no releases'}
+  - {url: 'https://www.onthebeach.co.uk/main_pages.xml', status: 200, note: '4,146 URLs; no ChatGPT/AI landing page'}
+  - {url: 'https://rubygems.org/api/v1/gems/structural.json', status: 200}
+  sources:
+  - {url: 'https://www.travolution.com/news/on-the-beach-announces-chatgpt-apps-integration-for-holiday-search/', date: '2026-04-01'}
+  - {url: 'https://travelweekly.co.uk/news/on-the-beach-first-uk-ota-to-integrate-chatgbt-for-live-holiday-search', date: '2026-04-01'}
+  - {url: 'https://crt.sh/?q=%25.onthebeach.co.uk', note: certificate transparency}
+  stillAbsent:
+  - OpenAPI / Swagger / GraphQL / AsyncAPI / gRPC / Postman
+  - Developer portal, API reference, getting started, signup, sandbox
+  - security.txt, api-catalog, OAuth/OIDC metadata
+  - Status page, changelog, deprecation policy, SLA, trust centre, bug bounty
+  - Any documented tool list, schema or auth flow for the ChatGPT App
 actions:
   apisListed: 0
   openapiDirectoryCreated: false
@@ -386,8 +489,11 @@ actions:
     developer documentation of any kind. Creating placeholder specs would be
     fabrication.
   recommendedRescan: >-
-    Re-probe if On the Beach ever ships the ChatGPT/Gemini integration its FY25
-    results describe as "enabling direct integration into ChatGPT, Gemini, and
-    emerging AI platforms" - that would be the first moment any part of its
-    API-first architecture becomes externally addressable, and the first thing
-    worth harvesting.
+    TRIGGERED AND CAPTURED - see addendum[0]. The ChatGPT integration the FY25
+    results promised shipped on 1 April 2026 and is recorded in
+    mcp/on-the-beach-mcp.yml. Next rescan: watch mcp.onthebeach.co.uk for a
+    JSON-RPC response (the Cloudflare WAF currently blocks tools/list), watch
+    for the Gemini equivalent, and re-check whether a documented tool list,
+    schema, auth flow or terms of use for the ChatGPT App is ever published. If
+    a tool list appears and any REST surface is ever documented, emit
+    mcp/on-the-beach-tool-crosswalk.yml.

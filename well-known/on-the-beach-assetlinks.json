@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "onthebeach.onthebeachapp",
+    "sha256_cert_fingerprints":
+    ["B5:81:1E:A7:32:60:84:2B:6A:20:9A:91:DD:3B:1A:52:7C:9D:2C:D7:2C:CB:EF:A7:19:26:9D:3D:89:09:73:EE"]
+  }
+}]
