@@ -1,6 +1,7 @@
 generated: '2026-07-28'
 method: searched
-status: published-gated
+status: gated
+status_raw: published-gated
 confidence: medium
 summary: >-
   On the Beach shipped a ChatGPT App on 1 April 2026, claiming to be the first
