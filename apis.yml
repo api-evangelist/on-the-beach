@@ -84,10 +84,12 @@ tags_raw:
 - MCP
 - Artificial Intelligence
 created: '2026-07-28'
-modified: '2026-07-28'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis: []
 common:
+- url: https://www.onthebeachgroupplc.com/rss/financial-calendar
+  type: BlogRSS
 - type: MCPServer
   name: On the Beach ChatGPT App (MCP, distribution-gated)
   url: mcp/on-the-beach-mcp.yml
