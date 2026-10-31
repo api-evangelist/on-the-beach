@@ -1,4 +1,4 @@
-# On the Beach (on-the-beach)
+# On the Beach
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,78 +64,91 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-On the Beach Group plc (LSE: OTB) is a Manchester-headquartered online travel agent and the United Kingdom's largest online short-haul beach package holiday specialist, founded in 2004 by Simon Cooper and registered at Aeroworks, 5 Adair Street, Manchester M1 2NQ. It sits on the demand side of the travel distribution chain: an asset-light dynamic packager that buys real-time seats from 42 airlines and hotel inventory from bedbanks and direct hotel contracts, combines them into ATOL-protected packages, and sells them direct to UK and Republic of Ireland consumers through onthebeach.co.uk, sunshine.co.uk and its mobile app. FY25 total transaction value was GBP 1.25bn across 1.7 million customers. It is a consumer of other operators' distribution APIs rather than a publisher of its own — it was the first UK OTA to take a direct NDC connection to Emirates' Online B2B API in 2019 and signed a direct Ryanair "Approved OTA" partnership in 2024 — and it explicitly bypasses the GDS layer entirely. Its API posture as a producer is honestly non-existent. The FY25 results describe an "API-first microservices architecture" and a proprietary Hotel Discovery Cache managing more than 5 billion hotel prices, but none of that surface is published: there is no developer portal, no API documentation, no OpenAPI or other machine-readable contract, no partner or trade API, and no self-serve access of any kind. Its only remaining B2B channel, Classic Collection, was put into orderly wind-down on 23 September 2025. Public docs do not exist, there is no published exit path, and every probed developer subdomain and contract path returned 404 or did not resolve.
+On the Beach Group plc (LSE: OTB) is a Manchester-headquartered online travel agent and the United Kingdom's largest online short-haul beach package holiday specialist, founded in 2004 by Simon Cooper and registered at Aeroworks, 5 Adair Street, Manchester M1 2NQ. It sits on the demand side of the travel distribution chain: an asset-light dynamic packager that buys real-time seats from 42 airlines and hotel inventory from bedbanks and direct hotel contracts, combines them into ATOL-protected packages, and sells them direct to UK and Republic of Ireland consumers through onthebeach.co.uk, sunshine.co.uk and its mobile app. FY25 total transaction value was GBP 1.25bn across 1.7 million customers. It is a consumer of other operators' distribution APIs rather than a publisher of its own - it was the first UK OTA to take a direct NDC connection to Emirates' Online B2B API in 2019 and signed a direct Ryanair "Approved OTA" partnership in 2024 - and it explicitly bypasses the GDS layer entirely. Its API posture as a producer is almost non-existent. The FY25 results describe an "API-first microservices architecture" and a proprietary Hotel Discovery Cache managing more than 5 billion hotel prices, but none of that surface is published: there is no developer portal, no API documentation, no OpenAPI or other machine-readable contract, no partner or trade API, and no self-serve access of any kind. Its only remaining B2B channel, Classic Collection, was put into orderly wind-down on 23 September 2025. The single exception, and the first externally addressable machine surface the company has ever shipped, is a ChatGPT App launched on 1 April 2026 - claimed as the first by a UK OTA - which serves live, bookable package combinations to ChatGPT users over MCP. That surface is distribution-gated rather than developer-facing: no endpoint, tool list, schema, auth flow or terms are documented, and a deliberate mcp.onthebeach.co.uk host exists but is Cloudflare WAF-blocked to every probe.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/on-the-beach/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/on-the-beach/refs/heads/main/apis.yml)
+**Areas:** Travel · United Kingdom · OTA · Online Travel Agency · Booking · Package Holidays · Aviation · Airlines · Distribution · NDC · Hotels · Hospitality
 
-## Tags
+## On the Beach on APIs.io
 
-- Travel
-- United Kingdom
-- OTA
-- Online Travel Agency
-- Booking
-- Package Holidays
-- Aviation
-- Airline
-- Distribution
-- NDC
-- Hotels
-- Hospitality
+Everything profiled for On the Beach is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/on-the-beach/](https://apis.io/providers/on-the-beach/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-28
-- **Modified:** 2026-07-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-No public APIs are listed. On the Beach Group publishes no developer portal, no API documentation, and no machine-readable API contract. Every developer subdomain (`developer.`, `api.`, `docs.`) fails to resolve, and `/openapi.json` and `/llms.txt` do not exist on any host. See [review.yml](review.yml) for the full probe log.
+Model Context Protocol servers that expose the API to agents.
 
-**One exception, found on 2026-07-28.** On the Beach launched a **ChatGPT App on 1 April 2026** — reported as the first by a UK OTA — which serves live, bookable holiday package combinations to ChatGPT users conversationally, with a booking deep link back to onthebeach.co.uk. ChatGPT Apps are served over **MCP**, making this the first externally addressable machine surface the company has ever shipped, and the delivery of the "direct integration into ChatGPT, Gemini, and emerging AI platforms" its FY25 results promised. It is distribution-gated, not developer-facing: no endpoint, tool list, input schema, auth flow, rate limit or terms is documented. A deliberate `mcp.onthebeach.co.uk` host exists (real DNS record, valid TLS, not a wildcard) but every request — including `tools/list` — is answered by the Cloudflare WAF with HTTP 403, so no tool was captured. See [mcp/on-the-beach-mcp.yml](mcp/on-the-beach-mcp.yml).
+- [On the Beach](https://apis.io/servers/on-the-beach/on-the-beach/)
 
-Certificate transparency shows the private side of the same architecture: certificates issued for `api.onthebeach.co.uk`, `api.sandbox1-8.onthebeach.co.uk`, `uapi.sandbox1-8.onthebeach.co.uk` and `otb-payments-notifications-api.staging.onthebeach.co.uk` — all of which now return NXDOMAIN to public DNS.
+#### Security (1)
 
-## Artifacts
+Authentication, trust centre, and vulnerability disclosure.
 
-| Artifact | File | Method |
-| --- | --- | --- |
-| MCP server | [mcp/on-the-beach-mcp.yml](mcp/on-the-beach-mcp.yml) | searched + probed |
-| Well-known | [well-known/on-the-beach-well-known.yml](well-known/on-the-beach-well-known.yml) | searched |
-| Packages | [packages/on-the-beach-packages.yml](packages/on-the-beach-packages.yml) | searched |
-| llms.txt | [llms/on-the-beach-llms.txt](llms/on-the-beach-llms.txt) | generated |
-| Domain security | [security/on-the-beach-domain-security.yml](security/on-the-beach-domain-security.yml) | probed |
+- [On The Beach Domain Security](https://apis.io/security/on-the-beach/on-the-beach-domain-security/)
 
-## Switching Cost
+## Where to find this API
 
-| Dimension | Finding |
-| --- | --- |
-| Interface shape | `none-published` — no NDC, OpenTravel/OTA, HTNG, OpenAPI or partner XML published |
-| Second source | `interchangeable-alternatives` — Jet2holidays, TUI UK, easyJet holidays, loveholidays, Expedia |
-| Exit path | `no-export-published` — no export operation; privacy notice unreachable (HTTP 403) |
-| Identifier portability | IATA airline/airport codes and CAA ATOL certificates inbound; proprietary internal inventory IDs otherwise |
-| Contractual lock-in | Nothing published — no developer or partner agreement exists |
-| Access gate | `none-published` — nothing to sign up for |
-| Distribution model | `aggregator-reseller` — direct-to-consumer only, no GDS, no channel manager, B2B closed September 2025 |
-| NDC posture | NDC consumer, not provider — Emirates Online B2B direct connect (2019), Ryanair Approved OTA (2024) |
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.onthebeachgroupplc.com/)
-- [Consumer Website](https://www.onthebeach.co.uk/)
-- [About](https://www.onthebeachgroupplc.com/about-us/who-we-are)
-- [Strategy](https://www.onthebeachgroupplc.com/about-us/strategy)
-- [Investor Relations](https://www.onthebeachgroupplc.com/investor-centre)
-- [Annual Report](https://www.onthebeachgroupplc.com/~/media/Files/O/On-The-Beach/investor-docs/results-and-presentations/on-the-beach-group-final-results-2025.pdf)
-- [GitHub Organization](https://github.com/onthebeach)
-- [LinkedIn](https://www.linkedin.com/company/on-the-beach)
-- [Contact](https://www.onthebeachgroupplc.com/contact)
-- [Support (Zendesk help centre)](https://help.onthebeach.co.uk/hc/en-gb)
-- [Terms of Service](https://www.onthebeach.co.uk/terms-and-conditions)
-- [Privacy Policy](https://www.onthebeach.co.uk/privacy)
-- [Affiliate Program (Partnerize / Awin)](https://www.onthebeach.co.uk/affiliates)
+- [Support](https://help.onthebeach.co.uk/hc/en-gb)
+- [Terms of service](https://www.onthebeach.co.uk/terms-and-conditions)
+- [Privacy policy](https://www.onthebeach.co.uk/privacy)
+- [GitHub](https://github.com/onthebeach)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 10.3** — minimal · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 51.7 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 4.8 |
+| Access clarity | 21.1 |
+
+**Agent readiness 3.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 12.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/on-the-beach/](https://apis.io/providers/on-the-beach/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for On the Beach: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/on-the-beach/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
